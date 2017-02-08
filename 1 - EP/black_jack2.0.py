@@ -25,8 +25,6 @@ def dif(totalPlayer,totalDealer):
 def twentyOne(totalPlayer,totalDealer):
 
     dealerVisible = False
-    difDealer = abs(totalDealer - 21)
-    difPlayer = abs(totalPlayer - 21)
 
     if totalPlayer == 21 or totalDealer > 21:
         print('\nTOTAL => Dealer ->', totalDealer,'Player ->', totalPlayer)
