@@ -3,49 +3,44 @@ from random import randint
 playerHand = []
 dealerHand = []
 
-def dif(totalPlayer,totalDealer):
 
-    dealerVisible = True
-    difPlayer = abs(totalPlayer - 21)
-    difDealer = abs(totalDealer - 21)
+def playGame():
+    
+    print('-------------------------WELCOME TO-------------------------\n')
+    print('-------------------------BLACK JACK-------------------------\n')
+    playerHand.clear()
+    dealerHand.clear()
 
-    if(difDealer < difPlayer):        
-        showCards('dealer', dealerVisible)
-        print('\nDIF => Dealer ->', difDealer, 'Player ->', difPlayer)
-        print('\nGAME OVER -- 21 -- DEALERWINS')
-        return False
-    elif(difPlayer < difDealer):        
-        showCards('dealer', dealerVisible)
-        print('\nDIF => Dealer ->', difDealer, 'Player ->', difPlayer, "\n")
-        print('\nGAME OVER -- 21 -- PLAYERWINS')
-        return False
-    else:
-        return True
+    firstRound()
+    HitStand()
 
-def twentyOne(totalPlayer,totalDealer):
-
+def firstRound():
+    
     dealerVisible = False
 
-    if totalPlayer == 21 or totalDealer > 21:
-        print('\nTOTAL => Dealer ->', totalDealer,'Player ->', totalPlayer)
-        print('\nGAME OVER -- 21 -- PLAYERWINS')
-        return False
+    addCardHand(2,'player')
+    addCardHand(2,'dealer')
 
-    elif totalDealer == 21 or totalPlayer > 21:
-        print('\nTOTAL => Dealer ->', totalDealer,'Player ->', totalPlayer)
-        print('\nGAME OVER -- 21 -- DEALERWINS')
-        return False
+    showCards('player', dealerVisible)
+    showCards('dealer', dealerVisible)
 
-    elif totalDealer == 21 and totalPlayer == 21:
-        print('\nTOTAL => Dealer ->', totalDealer,'Player ->', totalPlayer)
-        print('\nGAME OVER -- 21 -- DEALERWINS')
-        return False
+    JQK= [11,12,13]
 
-    else:
-        return True
+    for i in range(0,2):
+        for j in range(0,2):
+            if(playerHand[i][0] == 1 and playerHand[j][0] in JQK):
+                print("\n*********FIRST HIT WIN*******\n")
+                print("\nGAME OVER -- 21 -- PLAYER-WINS\n")
+                game_loop()
+            elif(dealerHand[i][0] == 1 and dealerHand[j][0] in JQK):
+                dealerVisible = True 
+                print("\n*********FIRST HIT WIN*******\n")
+                showCards('dealer', dealerVisible)
+                print("\nGAME OVER -- 21 -- DEALER-WINS\n")
+                game_loop()
 
 def HitStand():
-
+    
     dealerVisible = False
 
     Hit = True
@@ -71,8 +66,37 @@ def HitStand():
             elif(dealerS[1] < 21):
                 dif(dealerS[0],dealerS[1])
 
-def showCards(p, dealerVisible):
+def giveCard():
+    
+    NumberCard = [1,2,3,4,5,6,7,8,9,10,11,12,13]
+    NipeCard = ["C","P","O","E"]
 
+    Number = NumberCard[randint(0,12)]
+    Nipe = NipeCard[randint(0,3)]
+
+    Card = (Number, Nipe)
+
+    return Card
+
+def addCardHand(n,p):
+    
+    Card = giveCard()
+
+    if(p == 'player'):
+        for i in range(0, n):
+            while(Card in playerHand):
+                Card = giveCard()
+            if((Card in playerHand) == False and (Card in dealerHand) == False):
+                playerHand.append(Card)
+    if(p == 'dealer'):
+        for j in range(0, n):
+            while(Card in dealerHand):
+                Card = giveCard()
+            if((Card in dealerHand) == False and (Card in dealerHand) == False):
+                dealerHand.append(Card)
+
+def showCards(p, dealerVisible):
+    
     exibitionCards = ['A',2,3,4,5,6,7,8,9,10,'J','Q','K']
 
     if(p == "player"):
@@ -105,7 +129,7 @@ def showCards(p, dealerVisible):
                     return dealerVisible
 
 def sumCards():
-
+    
     valorCards = [1,2,3,4,5,6,7,8,9,10,10,10,10]
 
     totalDealer = 0
@@ -119,69 +143,66 @@ def sumCards():
 
     return totalPlayer,totalDealer
 
-def firstRound():
+
+def twentyOne(totalPlayer,totalDealer):
 
     dealerVisible = False
 
-    addCardHand(2,'player')
-    addCardHand(2,'dealer')
+    if totalPlayer == 21 or totalDealer > 21:
+        print('\nTOTAL => Dealer ->', totalDealer,'Player ->', totalPlayer)
+        print('\nGAME OVER -- 21 -- PLAYERWINS')
+        return False
 
-    showCards('player', dealerVisible)
-    showCards('dealer', dealerVisible)
+    elif totalDealer == 21 or totalPlayer > 21:
+        print('\nTOTAL => Dealer ->', totalDealer,'Player ->', totalPlayer)
+        print('\nGAME OVER -- 21 -- DEALERWINS')
+        return False
 
-    JQK= [11,12,13]
+    elif totalDealer == 21 and totalPlayer == 21:
+        print('\nTOTAL => Dealer ->', totalDealer,'Player ->', totalPlayer)
+        print('\nGAME OVER -- 21 -- DEALERWINS')
+        return False
 
-    for i in range(0,2):
-        for j in range(0,2):
-            if(playerHand[i][0] == 1 and playerHand[j][0] in JQK):
-                print("\n*********FIRST HIT WIN*******\n")
-                print("\nGAME OVER -- 21 -- PLAYER-WINS\n")
-                game_loop()
-            elif(dealerHand[i][0] == 1 and dealerHand[j][0] in JQK):
-                dealerVisible = True 
-                print("\n*********FIRST HIT WIN*******\n")
-                showCards('dealer', dealerVisible)
-                print("\nGAME OVER -- 21 -- DEALER-WINS\n")
-                game_loop()
+    else:
+        return True
 
-def playGame():
+def dif(totalPlayer,totalDealer):
+    
+    dealerVisible = True
+    difPlayer = abs(totalPlayer - 21)
+    difDealer = abs(totalDealer - 21)
 
-    print('-------------------------WELCOME TO-------------------------\n')
-    print('-------------------------BLACK JACK-------------------------\n')
-    playerHand.clear()
-    dealerHand.clear()
+    if(difDealer < difPlayer):        
+        showCards('dealer', dealerVisible)
+        print('\nDIF => Dealer ->', difDealer, 'Player ->', difPlayer)
+        print('\nGAME OVER -- 21 -- DEALERWINS')
+        return False
+    elif(difPlayer < difDealer):        
+        showCards('dealer', dealerVisible)
+        print('\nDIF => Dealer ->', difDealer, 'Player ->', difPlayer, "\n")
+        print('\nGAME OVER -- 21 -- PLAYERWINS')
+        return False
+    else:
+        return True
 
-    firstRound()
-    HitStand()
+def dif(totalPlayer,totalDealer):
+    
+    dealerVisible = True
+    difPlayer = abs(totalPlayer - 21)
+    difDealer = abs(totalDealer - 21)
 
-def addCardHand(n,p):
-
-    Card = giveCard()
-
-    if(p == 'player'):
-        for i in range(0, n):
-            while(Card in playerHand):
-                Card = giveCard()
-            if((Card in playerHand) == False and (Card in dealerHand) == False):
-                playerHand.append(Card)
-    if(p == 'dealer'):
-        for j in range(0, n):
-            while(Card in dealerHand):
-                Card = giveCard()
-            if((Card in dealerHand) == False and (Card in dealerHand) == False):
-                dealerHand.append(Card)
-
-def giveCard():
-
-    NumberCard = [1,2,3,4,5,6,7,8,9,10,11,12,13]
-    NipeCard = ["C","P","O","E"]
-
-    Number = NumberCard[randint(0,12)]
-    Nipe = NipeCard[randint(0,3)]
-
-    Card = (Number, Nipe)
-
-    return Card
+    if(difDealer < difPlayer):        
+        showCards('dealer', dealerVisible)
+        print('\nDIF => Dealer ->', difDealer, 'Player ->', difPlayer)
+        print('\nGAME OVER -- 21 -- DEALERWINS')
+        return False
+    elif(difPlayer < difDealer):        
+        showCards('dealer', dealerVisible)
+        print('\nDIF => Dealer ->', difDealer, 'Player ->', difPlayer, "\n")
+        print('\nGAME OVER -- 21 -- PLAYERWINS')
+        return False
+    else:
+        return True
 
 def game_loop():
     is_running = True
