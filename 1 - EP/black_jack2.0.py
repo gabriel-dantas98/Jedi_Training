@@ -28,7 +28,7 @@ def firstRound():
 
     for i in range(0,2):
         for j in range(0,2):
-            if(playerHand[i][0] == 1 and playerHand[j][0] in JQK):
+            if(playerHand[i][0] == 1 and playerHand[j][0] in JQK):  
                 print("\n*********FIRST HIT WIN*******\n")
                 print("\nGAME OVER -- 21 -- PLAYER-WINS\n")
                 game_loop()
@@ -49,9 +49,9 @@ def HitStand():
         user_choice = input("\n(H)IT OU (S)TAND ?\t")
         if(user_choice == 'H' or user_choice == 'h'):
             addCardHand(1,'player')
-            s = sumCards()
+            playerS = sumCards()
             showCards('ambos', dealerVisible)
-            Hit = twentyOne(s[0], s[1])
+            Hit = twentyOne(playerS[0], playerS[1])
 
         elif(user_choice == 'S' or user_choice == 's'):
             Hit = False

@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+body {
+    background: #000428 !important;
+    background: -webkit-linear-gradient(to left, #000428, #004e92) !important;
+    background: linear-gradient(to left, #000428, #004e92) !important;
+}
+
+.cesar {
+    padding-top: 9em;
+}
+
+.ui.huge.header {
+    text-align: center;
+    font-family: 'Lobster', cursive;
+    color: #F0F8FF;
+    font-size: 5em !important;
+}
+
+.mainContainer {
+    text-align: center;
+    padding-top: 3em;
+}
+
+.containerButtonsDescription {
+    padding-top: 15px;
+    padding-bottom: 3px;
+}
+
+.ui.icon.input input {
+    text-align: center;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    font-size: 35px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 10em;
+}
+
+.containerButtonsCrypt {
+    padding-top: 10px;
+}
+
+.ui.buttons {
+    padding-left: 5px;
+    padding-bottom: 10px;
+}
+
+#rotateDescription {
+    width: 101px;
+    margin-left: 5px;
+    margin-right: 4px;
+}
+
+#cryptLevelDescription {
+    width: 101px;
+    position: relative
+}
+
+#btnCryptLevel {
+    padding-left: 10px;
+}
+
+#btnEncrypt {
+    background-color: #4682B4;
+    color: white;
+}
+
+#btnDecrypt {
+    background-color: #4682B4;
+}
+
+#btnCryptLevelDec {
+    background-color: #FF8C00 !important;
+}
+
+#btnRotateDec {
+    background-color: #FF8C00;
+}
